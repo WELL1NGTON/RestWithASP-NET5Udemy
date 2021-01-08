@@ -6,7 +6,7 @@ using RestWithASPNETUdemy.Services;
 namespace RestWithASPNETUdemy.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PersonController : ControllerBase
     {
         private readonly ILogger<PersonController> _logger;
@@ -23,7 +23,7 @@ namespace RestWithASPNETUdemy.Controllers
             return Ok(_personService.FindAll());
         }
 
-        [HttpGet("`{id}")]
+        [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
             var person = _personService.FindByID(id);
