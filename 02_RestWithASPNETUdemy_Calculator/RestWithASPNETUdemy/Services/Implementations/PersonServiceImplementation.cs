@@ -1,13 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using RestWithASPNETUdemy.Model;
+using RestWithASPNETUdemy.Model.Context;
 
 namespace RestWithASPNETUdemy.Services.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        private volatile int count;
+        private MySQLContext _context;
+        public PersonServiceImplementation(MySQLContext context)
+        {
+            _context = context;
+        }
+
         public Person Create(Person person)
         {
             return person;
@@ -20,11 +27,7 @@ namespace RestWithASPNETUdemy.Services.Implementations
 
         public List<Person> FindAll()
         {
-            List<Person> persons = new List<Person>();
-            for (int i = 0; i < 8; i++)
-                persons.Add(MockPerson(i));
-
-            return persons;
+            return _context.Persons.ToList();
         }
 
         public Person FindByID(long id)
@@ -48,7 +51,7 @@ namespace RestWithASPNETUdemy.Services.Implementations
         {
             return new Person()
             {
-                Id = IncrementAndGet(),
+                Id = 1,
                 FirstName = "Person Name" + i,
                 LastName = "Person LastName" + i,
                 Address = "Some Address" + i,
@@ -56,9 +59,5 @@ namespace RestWithASPNETUdemy.Services.Implementations
             };
         }
 
-        private long IncrementAndGet()
-        {
-            return Interlocked.Increment(ref count);
-        }
     }
 }
