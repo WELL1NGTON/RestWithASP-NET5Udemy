@@ -12,8 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RestWithASPNETUdemy.Model.Context;
-using RestWithASPNETUdemy.Services;
-using RestWithASPNETUdemy.Services.Implementations;
+using RestWithASPNETUdemy.Business;
+using RestWithASPNETUdemy.Business.Implementations;
 
 namespace RestWithASPNETUdemy
 {
