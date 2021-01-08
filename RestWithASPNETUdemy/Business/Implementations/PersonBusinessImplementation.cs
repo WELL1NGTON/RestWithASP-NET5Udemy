@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RestWithASPNETUdemy.Model;
 using RestWithASPNETUdemy.Model.Context;
+using RestWithASPNETUdemy.Repository;
 
 namespace RestWithASPNETUdemy.Business.Implementations
 {
