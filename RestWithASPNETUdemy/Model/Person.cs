@@ -6,7 +6,6 @@ namespace RestWithASPNETUdemy.Model
     [Table("person")]
     public class Person : BaseEntity
     {
-
         [Column("first_name")]
         public string FirstName { get; set; }
 
