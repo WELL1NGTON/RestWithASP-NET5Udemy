@@ -45,10 +45,10 @@ namespace RestWithASPNETUdemy
                 MigrateDatabase(connection);
             }
 
+            // API produz e aceita xml e json
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
-
                 options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
                 options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
             })
