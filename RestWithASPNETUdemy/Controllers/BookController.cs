@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestWithASPNETUdemy.Business;
-using RestWithASPNETUdemy.Model;
+using RestWithASPNETUdemy.Data.VO;
 
 namespace RestWithASPNETUdemy.Controllers
 {
@@ -27,35 +27,35 @@ namespace RestWithASPNETUdemy.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            var person = _bookBusiness.FindByID(id);
-            if (person == null)
+            var book = _bookBusiness.FindByID(id);
+            if (book == null)
                 return NotFound();
-            return Ok(person);
+            return Ok(book);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Book person)
+        public IActionResult Post([FromBody] BookVO book)
         {
-            if (person == null)
+            if (book == null)
                 return NotFound();
 
-            return Ok(_bookBusiness.Create(person));
+            return Ok(_bookBusiness.Create(book));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Book person)
+        public IActionResult Put([FromBody] BookVO book)
         {
-            if (person == null)
+            if (book == null)
                 return NotFound();
 
-            return Ok(_bookBusiness.Update(person));
+            return Ok(_bookBusiness.Update(book));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var person = _bookBusiness.FindByID(id);
-            if (person == null)
+            var book = _bookBusiness.FindByID(id);
+            if (book == null)
                 return NotFound();
 
             _bookBusiness.Delete(id);
