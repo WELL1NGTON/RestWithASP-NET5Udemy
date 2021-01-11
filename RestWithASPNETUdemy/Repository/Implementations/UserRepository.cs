@@ -29,6 +29,11 @@ namespace RestWithASPNETUdemy.Repository.Implementations
                 );
         }
 
+        public User ValidateCredentials(string userName)
+        {
+            return _context.Users.SingleOrDefault(u => u.UserName == userName);
+        }
+
         public User RefreshUserInfo(User user)
         {
             if (_context.Users.Any(p => p.Id.Equals(user.Id)) == false) return null;
