@@ -31,6 +31,15 @@ namespace RestWithASPNETUdemy.Services.Implementations
                 signingCredentials: signingCredentials
             );
 
+
+            /**
+             * * Observação Importante !
+             * Aparentemente o JsonWebTokenHandler (package Microsoft.IdentityModel.JsonWebTokens) é mais novo e melhor do que JwtSecurityTokenHandler
+             * porém esse curso está usando JwtSecurityTokenHandler, então vou manter esse
+             *
+             * https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet/issues/945#issuecomment-405113306
+             */
+
             string tokenString = new JwtSecurityTokenHandler().WriteToken(options);
 
             return tokenString;
