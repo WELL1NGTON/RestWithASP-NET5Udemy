@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace RestWithASPNETUdemy.Hypermedia.Abstract
 {
-    public interface ISupportHypermedia
+    public interface ISupportHyperMedia
     {
         List<HyperMediaLink> Links { get; set; }
     }
