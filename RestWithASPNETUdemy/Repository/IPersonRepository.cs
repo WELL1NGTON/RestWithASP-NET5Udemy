@@ -5,6 +5,6 @@ namespace RestWithASPNETUdemy.Repository
 {
     public interface IPersonRepository : IRepository<Person>
     {
-        Person Disabled(long id);
+        Person Disable(long id);
     }
 }
