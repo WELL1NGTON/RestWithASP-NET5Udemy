@@ -11,13 +11,13 @@ namespace RestWithASPNETUdemy.Model
         [Column("id")]
         public long Id { get; set; }
         [Column("user_name")]
-        public long UserName { get; set; }
+        public string UserName { get; set; }
         [Column("full_name")]
-        public long FullName { get; set; }
+        public string FullName { get; set; }
         [Column("password")]
-        public long Password { get; set; }
+        public string Password { get; set; }
         [Column("refresh_token")]
-        public long RefreshToken { get; set; }
+        public string RefreshToken { get; set; }
         [Column("refresh_token_expiry_time")]
         public DateTime RefreshTokenExpiryTime { get; set; }
     }
