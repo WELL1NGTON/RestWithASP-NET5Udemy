@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Data.VO;
@@ -33,13 +34,27 @@ namespace RestWithASPNETUdemy.Controllers
         [Route("refresh")]
         public IActionResult Refresh([FromBody] TokenVO tokenVo)
         {
-            if (tokenVo == null) return BadRequest("Invalid client request");
+            if (tokenVo == null || tokenVo.AccessToken == null || tokenVo.RefreshToken == null)
+                return BadRequest("Invalid client request");
 
             var token = _loginBusiness.ValidateCredentials(tokenVo);
 
             if (token == null) return BadRequest("Invalid client request");
 
             return Ok(token);
+        }
+
+        [HttpGet]
+        [Authorize("Bearer")]
+        [Route("revoke")]
+        public IActionResult Revoke()
+        {
+            var userName = User.Identity.Name;
+            var result = _loginBusiness.RevokeToken(userName);
+
+            if (!result) return BadRequest("Invalid client request");
+
+            return NoContent();
         }
     }
 }
