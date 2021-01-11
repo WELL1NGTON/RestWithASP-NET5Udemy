@@ -5,7 +5,7 @@ namespace RestWithASPNETUdemy.Hypermedia.Abstract
 {
     public interface IResponseEnricher
     {
-        bool canEnrich(ResultExecutedContext context);
-        Task Enrich(ResultExecutedContext context);
+        bool CanEnrich(ResultExecutingContext context);
+        Task Enrich(ResultExecutingContext context);
     }
 }

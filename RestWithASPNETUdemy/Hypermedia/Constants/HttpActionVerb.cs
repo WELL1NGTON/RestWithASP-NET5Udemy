@@ -1,4 +1,4 @@
-namespace RestWithASPNETUdemy.Hypermedia.Abstract.Constants
+namespace RestWithASPNETUdemy.Hypermedia.Constants
 {
     public sealed class HttpActionVerb
     {
