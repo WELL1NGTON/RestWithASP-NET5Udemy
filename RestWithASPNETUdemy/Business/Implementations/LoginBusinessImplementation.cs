@@ -37,7 +37,7 @@ namespace RestWithASPNETUdemy.Business.Implementations
             var refreshToken = _tokenService.GenerateRefreshToken();
 
             user.RefreshToken = refreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaysToExpire);
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaysToExpiry);
 
             _repository.RefreshUserInfo(user);
 
