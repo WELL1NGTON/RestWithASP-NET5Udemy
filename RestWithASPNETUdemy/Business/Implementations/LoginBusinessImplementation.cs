@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-// using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-// using Microsoft.IdentityModel.JsonWebTokens;
 using RestWithASPNETUdemy.Configurations;
 using RestWithASPNETUdemy.Data.VO;
 using RestWithASPNETUdemy.Repository;
@@ -40,8 +38,12 @@ namespace RestWithASPNETUdemy.Business.Implementations
 
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaysToExpire);
+
+            _repository.RefreshUserInfo(user);
+
             DateTime createDate = DateTime.Now;
             DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
+
             return new TokenVO(
                 true,
                 createDate.ToString(DATE_FORMAT),

@@ -6,7 +6,7 @@ using RestWithASPNETUdemy.Data.VO;
 using RestWithASPNETUdemy.Model;
 using RestWithASPNETUdemy.Model.Context;
 
-namespace RestWithASPNETUdemy.Repository
+namespace RestWithASPNETUdemy.Repository.Implementations
 {
     public class UserRepository : IUserRepository
     {
