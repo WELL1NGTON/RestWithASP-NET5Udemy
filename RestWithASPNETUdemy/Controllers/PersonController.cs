@@ -73,6 +73,18 @@ namespace RestWithASPNETUdemy.Controllers
             return Ok(_personBusiness.Update(person));
         }
 
+        [HttpPatch("{id}")]
+        [ProducesResponseType(200, Type = typeof(BookVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Patch(long id)
+        {
+            var person = _personBusiness.Disable(id);
+            return Ok(person);
+        }
+
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
