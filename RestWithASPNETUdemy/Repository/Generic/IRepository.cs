@@ -10,7 +10,9 @@ namespace RestWithASPNETUdemy.Repository.Generic
         List<T> FindAll();
         T Update(T book);
         void Delete(long id);
-
         bool Exists(long id);
+        List<T> FindWithPagedSearch(string query);
+
+        int GetCount(string query);
     }
 }

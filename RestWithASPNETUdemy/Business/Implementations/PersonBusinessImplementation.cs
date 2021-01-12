@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using RestWithASPNETUdemy.Data.Converter.Implementations;
 using RestWithASPNETUdemy.Data.VO;
+using RestWithASPNETUdemy.Hypermedia.Utils;
 using RestWithASPNETUdemy.Repository;
 
 namespace RestWithASPNETUdemy.Business.Implementations
@@ -18,6 +19,37 @@ namespace RestWithASPNETUdemy.Business.Implementations
         public List<PersonVO> FindAll()
         {
             return _converter.Parse(_repository.FindAll());
+        }
+
+        public PagedSearchVO<PersonVO> FindWithPagedSearch(string name, string sortDirection, int pageSize, int page)
+        {
+            var offset = page > 0 ? (page - 1) * pageSize : 0;
+            var sort = (!string.IsNullOrWhiteSpace(sortDirection) && !sortDirection.Equals("desc")) ? "asc" : "desc";
+            var size = (page < 1) ? 1 : pageSize;
+
+            string query =
+              @"select
+                    *
+                from
+                    Person p
+                where 1 = 1
+                    and p.name like '%LEO%'
+                order by
+                    p.name asc limit 10 offset 1";
+
+            string countQuery = "";
+
+            var persons = _repository.FindWithPagedSearch(query);
+            int totalResults = _repository.GetCount(countQuery);
+
+            return new PagedSearchVO<PersonVO>
+            {
+                CurrentPage = offset,
+                List = _converter.Parse(persons),
+                PageSize = size,
+                SortDirections = sort,
+                TotalResults = totalResults
+            };
         }
 
         public PersonVO FindByID(long id)
@@ -54,7 +86,5 @@ namespace RestWithASPNETUdemy.Business.Implementations
         {
             _repository.Delete(id);
         }
-
-
     }
 }
