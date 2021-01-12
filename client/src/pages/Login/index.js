@@ -12,9 +12,9 @@ export default function Login() {
                 <h1>Access your Account</h1>
                 <input placeholder="Username"/>
                 <input type="password" placeholder="Password"/>
-                
-                <button type="submit">Login</button>
-            </from>
+
+                <button className="button" type="submit">Login</button>
+            </from> 
         </section>
         <img src={padlock} alt="Login"/>
     </div>
