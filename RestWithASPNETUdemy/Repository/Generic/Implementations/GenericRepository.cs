@@ -9,9 +9,9 @@ namespace RestWithASPNETUdemy.Repository.Generic.Implementations
 {
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
-        protected MySQLContext _context;
+        protected PostgreeSQLContext _context;
         private DbSet<T> _dataset;
-        public GenericRepository(MySQLContext context)
+        public GenericRepository(PostgreeSQLContext context)
         {
             _context = context;
             _dataset = _context.Set<T>();
