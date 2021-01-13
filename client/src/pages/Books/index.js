@@ -16,6 +16,35 @@ export default function Books() {
 
   const history = useHistory();
 
+  async function logout() {
+    try {
+      await api.get(`api/Auth/v1/revoke`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      localStorage.clear();
+      history.push('/');
+    } catch (err) {
+      alert('Logout failed! Try again!');
+    }
+  }
+
+  async function deleteBook(id) {
+    try {
+      await api.delete(`api/Book/v1/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      setBooks(books.filter((book) => book.id !== id));
+    } catch (err) {
+      alert('Delete failed! Try again!');
+    }
+  }
+
   useEffect(() => {
     api
       .get('api/Book/v1/asc/5/1', {
@@ -36,7 +65,7 @@ export default function Books() {
         <Link className="button" to="books/new">
           Add New Book
         </Link>
-        <button type="button">
+        <button onClick={logout} type="button">
           <FiPower size={18} color="#251fC5" />
         </button>
       </header>
@@ -63,7 +92,7 @@ export default function Books() {
             <button type="button">
               <FiEdit size={20} color="#251fc5" />
             </button>
-            <button type="button">
+            <button onClick={() => deleteBook(book.id)} type="button">
               <FiTrash2 size={20} color="#251fc5" />
             </button>
           </li>
