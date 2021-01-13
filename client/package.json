@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "jshint": "^2.12.0",
     "prettier-eslint": "^12.0.0"
   }
 }
