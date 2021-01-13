@@ -1,10 +1,44 @@
-import React from 'react';
 import './styles.css';
-import logoImage from '../../assets/logo.svg';
+
+import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+
 import { FiArrowLeft } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import api from '../../services/api';
+import logoImage from '../../assets/logo.svg';
 
 export default function NewBook() {
+  const [author, setAuthor] = useState('');
+  const [title, setTitle] = useState('');
+  const [launchDate, setLaunchDate] = useState('');
+  const [price, setPrice] = useState('');
+
+  const history = useHistory();
+
+  async function createNewBook(e) {
+    e.preventDefault();
+
+    const data = {
+      title,
+      author,
+      launchDate,
+      price,
+    };
+
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    try {
+      await api.post('api/Book/v1', data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      history.push('/books');
+    } catch (err) {}
+  }
+
   return (
     <div className="new-book-container">
       <div className="content">
@@ -17,11 +51,27 @@ export default function NewBook() {
             Home
           </Link>
         </section>
-        <form>
-          <input placeholder="Title" />
-          <input placeholder="Author" />
-          <input type="date" />
-          <input placeholder="Price" />
+        <form onSubmit={createNewBook}>
+          <input
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            placeholder="Author"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+          />
+          <input
+            type="date"
+            value={launchDate}
+            onChange={(e) => setLaunchDate(e.target.value)}
+          />
+          <input
+            placeholder="Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
 
           <button className="button" type="submit">
             Add

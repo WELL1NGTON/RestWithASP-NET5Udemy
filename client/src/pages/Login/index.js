@@ -1,9 +1,11 @@
+import './styles.css';
+
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+
 import api from '../../services/api';
 import logoImage from '../../assets/logo.svg';
 import padlock from '../../assets/padlock.png';
-import './styles.css';
+import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const [userName, setUserName] = useState('');
