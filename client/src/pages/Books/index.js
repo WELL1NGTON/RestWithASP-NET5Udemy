@@ -31,6 +31,14 @@ export default function Books() {
     }
   }
 
+  async function editBook(id) {
+    try {
+      history.push(`books/new/${id}`);
+    } catch (err) {
+      alert('Edit book failed! Try again!');
+    }
+  }
+
   async function deleteBook(id) {
     try {
       await api.delete(`api/Book/v1/${id}`, {
@@ -62,7 +70,7 @@ export default function Books() {
         <span>
           Welcome, <strong>{userName.toLowerCase()}</strong>!
         </span>
-        <Link className="button" to="books/new">
+        <Link className="button" to="books/new/0">
           Add New Book
         </Link>
         <button onClick={logout} type="button">
@@ -90,7 +98,11 @@ export default function Books() {
             </p>
 
             <button type="button">
-              <FiEdit size={20} color="#251fc5" />
+              <FiEdit
+                size={20}
+                onClick={() => editBook(book.id)}
+                color="#251fc5"
+              />
             </button>
             <button onClick={() => deleteBook(book.id)} type="button">
               <FiTrash2 size={20} color="#251fc5" />

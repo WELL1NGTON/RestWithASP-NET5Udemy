@@ -1,6 +1,6 @@
 import './styles.css';
 
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 
 import { FiArrowLeft } from 'react-icons/fi';
@@ -12,6 +12,7 @@ export default function NewBook() {
   const [title, setTitle] = useState('');
   const [launchDate, setLaunchDate] = useState('');
   const [price, setPrice] = useState('');
+  const { bookId } = useParams();
 
   const history = useHistory();
 
@@ -45,7 +46,7 @@ export default function NewBook() {
         <section className="form">
           <img src={logoImage} alt="Erudio" />
           <h1>Add New Book</h1>
-          <p>enter the book information and click on 'Add'!</p>
+          <p>enter the book information and click on 'Add'! ##### {bookId}</p>
           <Link className="back-link" to="/books">
             <FiArrowLeft size={16} color="#251fc5" />
             Home
