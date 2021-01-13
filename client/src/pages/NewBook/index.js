@@ -26,9 +26,10 @@ export default function NewBook() {
   };
 
   useEffect(() => {
-    if (bookId == '0') return;
+    if (bookId === '0') return;
     else loadBook();
-  }, bookId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bookId]);
 
   async function loadBook() {
     try {
