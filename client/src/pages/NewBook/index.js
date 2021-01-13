@@ -57,22 +57,12 @@ export default function NewBook() {
       price,
     };
 
-    const accessToken = localStorage.getItem('accessToken');
-
     try {
       if (bookId === '0') {
-        await api.post('api/Book/v1', data, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        await api.post('api/Book/v1', data, authorization);
       } else {
         data.id = id;
-        await api.put('api/Book/v1', data, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        await api.put('api/Book/v1', data, authorization);
       }
 
       history.push('/books');
