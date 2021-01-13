@@ -28,7 +28,7 @@ export default function NewBook() {
   useEffect(() => {
     if (bookId == '0') return;
     else loadBook();
-  }, [bookId]);
+  }, bookId);
 
   async function loadBook() {
     try {
@@ -47,7 +47,7 @@ export default function NewBook() {
     }
   }
 
-  async function createNewBook(e) {
+  async function saveOrUpdate(e) {
     e.preventDefault();
 
     const data = {
@@ -58,14 +58,22 @@ export default function NewBook() {
     };
 
     const accessToken = localStorage.getItem('accessToken');
-    const refreshToken = localStorage.getItem('refreshToken');
 
     try {
-      await api.post('api/Book/v1', data, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      if (bookId === '0') {
+        await api.post('api/Book/v1', data, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+      } else {
+        data.id = id;
+        await api.put('api/Book/v1', data, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+      }
 
       history.push('/books');
     } catch (err) {}
@@ -76,14 +84,17 @@ export default function NewBook() {
       <div className="content">
         <section className="form">
           <img src={logoImage} alt="Erudio" />
-          <h1>Add New Book</h1>
-          <p>enter the book information and click on 'Add'! ##### {bookId}</p>
+          <h1>{bookId === '0' ? 'Add' : 'Update'} New Book</h1>
+          <p>
+            enter the book information and click on '
+            {bookId === '0' ? 'Add' : 'Update'}'!
+          </p>
           <Link className="back-link" to="/books">
             <FiArrowLeft size={16} color="#251fc5" />
-            Home
+            Back to Books
           </Link>
         </section>
-        <form onSubmit={createNewBook}>
+        <form onSubmit={saveOrUpdate}>
           <input
             placeholder="Title"
             value={title}
@@ -106,7 +117,7 @@ export default function NewBook() {
           />
 
           <button className="button" type="submit">
-            Add
+            {bookId === '0' ? 'Add' : 'Update'}
           </button>
         </form>
       </div>
